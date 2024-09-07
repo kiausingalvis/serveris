@@ -4,6 +4,7 @@ import com.example.examplemod.Config;
 import com.example.examplemod.ExampleMod;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -14,6 +15,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 import java.util.List;
+
+import static com.example.examplemod.utils.ClientMessage.sendClientMessage;
 
 @Mod.EventBusSubscriber(modid = ExampleMod.MODID)
 public class Mining {
@@ -54,6 +57,7 @@ public class Mining {
             if (event.getState().getBlock() == Blocks_with_xp[i - 1]) {
                 Config.MiningSkill.addMiningXp(event.getPlayer(), Blocks_given_xp[i - 1]);
                 System.out.println(event.getPlayer() + " mining xp: " + Config.MiningSkill.getMiningXp(event.getPlayer())+ " Mining Level: " + MINING_LEVEL);
+                sendClientMessage((ServerPlayer) event.getPlayer(), "§b+"+Blocks_given_xp[i-1]+" mining xp");
                 if (!event.getPlayer().isCreative() && !event.getLevel().isClientSide()) {
                     ServerLevel world = (ServerLevel) event.getLevel();
                     BlockPos pos = event.getPos();
