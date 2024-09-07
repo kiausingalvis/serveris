@@ -1,0 +1,2 @@
+MINING: 
+to change mining blocks need to add to BlockBreakEventHandler array too
