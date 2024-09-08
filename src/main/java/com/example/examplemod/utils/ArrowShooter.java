@@ -9,7 +9,7 @@ import net.minecraft.world.phys.Vec3;
 
 public class ArrowShooter {
 
-    public static void shootArrow(ServerPlayer player) {
+    public static void shootArrow(ServerPlayer player, Float arrowdamage) {
         // Get the level (world) where the player is located
         ServerLevel level = player.getLevel();
 
@@ -17,15 +17,15 @@ public class ArrowShooter {
         Vec3 lookVector = player.getLookAngle();
 
         // Shoot the main arrow straight
-        shootSingleArrow(level, player, lookVector, 3.0F, 60.0F, false);
+        shootSingleArrow(level, player, lookVector, 3.0F, arrowdamage, false);
 
         // Shoot one arrow 15 degrees to the left
         Vec3 leftArrowVector = rotateVector(lookVector, -5);
-        shootSingleArrow(level, player, leftArrowVector, 3.0F, 6.0F, false);
+        shootSingleArrow(level, player, leftArrowVector, 3.0F, arrowdamage, false);
 
         // Shoot one arrow 15 degrees to the right
         Vec3 rightArrowVector = rotateVector(lookVector, 5);
-        shootSingleArrow(level, player, rightArrowVector, 3.0F, 6.0F, false);
+        shootSingleArrow(level, player, rightArrowVector, 3.0F, arrowdamage, false);
 
         // Optionally: Play a sound for shooting the arrows
         player.getLevel().playSound(null, player.getX(), player.getY(), player.getZ(),
@@ -48,7 +48,7 @@ public class ArrowShooter {
 
         //arrow properties
         arrow.pickup = Arrow.Pickup.DISALLOWED;
-        arrow.setPierceLevel((byte)1);
+        arrow.setPierceLevel((byte)10);
 
         // Spawn the arrow in the world
         level.addFreshEntity(arrow);

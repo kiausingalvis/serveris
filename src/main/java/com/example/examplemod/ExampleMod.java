@@ -35,6 +35,7 @@ public class ExampleMod
         MinecraftForge.EVENT_BUS.register(SellHand.class);
         MinecraftForge.EVENT_BUS.register(BlockBreakEventHandler.class);
         MinecraftForge.EVENT_BUS.register(BlockPlaceEvent.class);
+        MinecraftForge.EVENT_BUS.register(RightClickEventHandler.class);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }

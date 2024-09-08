@@ -16,9 +16,12 @@ public class RightClickEventHandler {
     @SubscribeEvent
     public static void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
         Player player = event.getEntity().createCommandSourceStack().getPlayer();
+        System.out.println("right clicked");
+        System.out.println(player.getMainHandItem().getDisplayName().getString());
 
-        if(player.getMainHandItem().getDisplayName().equals("BYBYS")){
-            shootArrow((ServerPlayer) player);
+        if(player.getMainHandItem().getDisplayName().getString().equals("[BYBYS]")){
+            System.out.println("should shoot");
+            shootArrow((ServerPlayer) player, 10f);
         }
     }
 }
