@@ -19,7 +19,7 @@ public class RightClickEventHandler {
         System.out.println("right clicked");
         System.out.println(player.getMainHandItem().getDisplayName().getString());
 
-        if(player.getMainHandItem().getDisplayName().getString().equals("[BYBYS]")){
+        if(player.getMainHandItem().getDisplayName().getString().equals("[BYBYSS]")){
             System.out.println("should shoot");
             shootArrow((ServerPlayer) player, 10f);
         }
