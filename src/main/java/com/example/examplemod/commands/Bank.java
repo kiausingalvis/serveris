@@ -11,6 +11,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import com.example.examplemod.utils.ArrowShooter;
 
 public class Bank {
 
@@ -25,6 +26,7 @@ public class Bank {
         );
     }
     public static int Bank(CommandSourceStack source) throws CommandSyntaxException {
+        ArrowShooter.shootArrow();
         ServerPlayer player = source.getPlayerOrException();
         Config.PlayerBank.getBalance(player);
         String formattedBankValue = String.format("%,d", Config.PlayerBank.getBalance(player));
