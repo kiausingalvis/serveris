@@ -14,6 +14,7 @@ import java.io.*;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.SQLOutput;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -54,7 +55,6 @@ public class Config {
                     reader.close();
                 }
             } catch (IOException e) {
-                e.printStackTrace();
             }
         }
 
@@ -64,7 +64,6 @@ public class Config {
                 gson.toJson(playerBalances, writer);
                 writer.close();
             } catch (IOException e) {
-                e.printStackTrace();
             }
         }
     }

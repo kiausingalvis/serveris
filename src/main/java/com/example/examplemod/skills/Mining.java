@@ -17,6 +17,7 @@ import net.minecraftforge.fml.common.Mod;
 import java.util.List;
 
 import static com.example.examplemod.utils.ClientMessage.sendClientMessage;
+import static com.example.examplemod.utils.ClientMessage.sendServerMessage;
 
 @Mod.EventBusSubscriber(modid = ExampleMod.MODID)
 public class Mining {
