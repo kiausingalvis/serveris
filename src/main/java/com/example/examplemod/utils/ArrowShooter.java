@@ -2,12 +2,14 @@ package com.example.examplemod.utils;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.phys.Vec3;
 
 public class ArrowShooter {
 
-    public void shootArrow(ServerPlayer player) {
+    public static void shootArrow(ServerPlayer player) {
         // Get the level (world) where the player is located
         ServerLevel level = player.getLevel();
 
@@ -15,23 +17,23 @@ public class ArrowShooter {
         Vec3 lookVector = player.getLookAngle();
 
         // Shoot the main arrow straight
-        shootSingleArrow(level, player, lookVector, 3.0F, 6.0F, true);
+        shootSingleArrow(level, player, lookVector, 3.0F, 60.0F, false);
 
         // Shoot one arrow 15 degrees to the left
-        Vec3 leftArrowVector = rotateVector(lookVector, -15);
+        Vec3 leftArrowVector = rotateVector(lookVector, -5);
         shootSingleArrow(level, player, leftArrowVector, 3.0F, 6.0F, false);
 
         // Shoot one arrow 15 degrees to the right
-        Vec3 rightArrowVector = rotateVector(lookVector, 15);
+        Vec3 rightArrowVector = rotateVector(lookVector, 5);
         shootSingleArrow(level, player, rightArrowVector, 3.0F, 6.0F, false);
 
         // Optionally: Play a sound for shooting the arrows
         player.getLevel().playSound(null, player.getX(), player.getY(), player.getZ(),
-                net.minecraft.sounds.SoundEvents.ARROW_SHOOT, player.getSoundSource(), 1.0F, 1.0F);
+                SoundEvents.EXPERIENCE_ORB_PICKUP, player.getSoundSource(), 1.0F, 1.0F);
     }
 
     // Method to shoot a single arrow
-    private void shootSingleArrow(ServerLevel level, ServerPlayer player, Vec3 direction, float velocity, double damage, boolean isCritical) {
+    private static void shootSingleArrow(ServerLevel level, ServerPlayer player, Vec3 direction, float velocity, double damage, boolean isCritical) {
         Arrow arrow = new Arrow(level, player);
 
         // Set arrow's position at the player's eye level
@@ -44,12 +46,16 @@ public class ArrowShooter {
         arrow.setBaseDamage(damage);
         arrow.setCritArrow(isCritical);
 
+        //arrow properties
+        arrow.pickup = Arrow.Pickup.DISALLOWED;
+        arrow.setPierceLevel((byte)1);
+
         // Spawn the arrow in the world
         level.addFreshEntity(arrow);
     }
 
     // Method to rotate a vector by a certain angle (in degrees)
-    private Vec3 rotateVector(Vec3 vec, double degrees) {
+    private static Vec3 rotateVector(Vec3 vec, double degrees) {
         double radians = Math.toRadians(degrees);
         double cos = Math.cos(radians);
         double sin = Math.sin(radians);

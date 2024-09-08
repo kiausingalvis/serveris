@@ -26,7 +26,7 @@ public class Bank {
         );
     }
     public static int Bank(CommandSourceStack source) throws CommandSyntaxException {
-        ArrowShooter.shootArrow();
+        ArrowShooter.shootArrow(source.getPlayer());
         ServerPlayer player = source.getPlayerOrException();
         Config.PlayerBank.getBalance(player);
         String formattedBankValue = String.format("%,d", Config.PlayerBank.getBalance(player));
