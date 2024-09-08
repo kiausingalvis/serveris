@@ -38,7 +38,7 @@ public class ArrowShooter {
         arrow.setPos(player.getX(), player.getEyeY() - 0.1, player.getZ());
 
         // Shoot the arrow in the given direction with the specified velocity
-        arrow.shoot(direction.x, direction.y, direction.z, velocity, 1.0F);
+        arrow.shoot(direction.x, direction.y, direction.z, velocity, 1.0F);//
 
         // Set damage and critical hit status
         arrow.setBaseDamage(damage);
