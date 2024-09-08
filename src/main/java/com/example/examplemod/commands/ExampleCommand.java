@@ -14,12 +14,9 @@ public class ExampleCommand {
 
         // Using Component.literal to create the display name
         Component displayName = Component.literal("gamer balls"); // Create a component with literal text
-
-        int damage = 10;
-        String description = "A sword of great power.";
         String uniqueId = "PIMPALAS";
 
-        ItemStack customStack = ItemUtils.addCustomNBTData(item, displayName, damage, description, uniqueId);
+        ItemStack customStack = ItemUtils.addCustomNBTData(item, displayName, uniqueId);
         ItemUtils.giveCustomItemToPlayer(player, customStack);
     }
 }

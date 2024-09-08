@@ -14,12 +14,10 @@ public class ItemUtils {
      *
      * @param item The item to which the NBT data should be added.
      * @param displayName The display name of the item.
-     * @param damage The damage value of the item (if applicable).
-     * @param description The description of the item.
      * @param uniqueId A unique identifier for the item.
      * @return The modified ItemStack with custom NBT data.
      */
-    public static ItemStack addCustomNBTData(Item item, Component displayName, int damage, String description, String uniqueId) {
+    public static ItemStack addCustomNBTData(Item item, Component displayName, String uniqueId) {
         // Create a new ItemStack with the given item
         ItemStack stack = new ItemStack(item);
 
@@ -32,8 +30,6 @@ public class ItemUtils {
         // Set the custom NBT data
         CompoundTag customTag = tag.getCompound("CustomTag");
         customTag.putString("UniqueId", uniqueId);
-        customTag.putInt("Damage", damage);
-        customTag.putString("Description", description);
 
         // Apply the custom tag to the item stack
         tag.put("CustomTag", customTag);
