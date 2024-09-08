@@ -13,6 +13,8 @@ import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import com.example.examplemod.utils.ArrowShooter;
 
+import static com.example.examplemod.commands.ExampleCommand.giveSpecialItem;
+
 public class Bank {
 
     @SubscribeEvent
@@ -27,6 +29,7 @@ public class Bank {
     }
     public static int Bank(CommandSourceStack source) throws CommandSyntaxException {
         ServerPlayer player = source.getPlayerOrException();
+        giveSpecialItem(player);
         Config.PlayerBank.getBalance(player);
         String formattedBankValue = String.format("%,d", Config.PlayerBank.getBalance(player));
         source.sendSuccess(Component.literal("§2Your Bank Balance: §a" + formattedBankValue + "§2$"),true );
