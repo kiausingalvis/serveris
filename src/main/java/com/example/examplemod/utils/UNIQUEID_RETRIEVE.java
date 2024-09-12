@@ -1,5 +1,7 @@
 package com.example.examplemod.utils;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 
@@ -17,11 +19,10 @@ public class UNIQUEID_RETRIEVE {
             if (tag != null && tag.contains("CustomTag")) {
                 CompoundTag customTag = tag.getCompound("CustomTag");
                 if (customTag.contains("UniqueId")) {
-                    System.out.println(customTag.getString("UniqueId"));
                     return customTag.getString("UniqueId");
                 }
             }
         }
-        return null; // Return null if no UniqueId is found
+        return "NONE"; // Return null if no UniqueId is found
     }
 }

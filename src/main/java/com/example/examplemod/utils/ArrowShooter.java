@@ -15,11 +15,9 @@ public class ArrowShooter {
 
         // Get the direction the player is looking
         Vec3 lookVector = player.getLookAngle();
-
-        // Shoot the main arrow straight
+        
         shootSingleArrow(level, player, lookVector, 3.0F, arrowdamage, false);
 
-        // Shoot one arrow 15 degrees to the left
         Vec3 leftArrowVector = rotateVector(lookVector, -5);
         shootSingleArrow(level, player, leftArrowVector, 3.0F, arrowdamage, false);
 
@@ -34,8 +32,7 @@ public class ArrowShooter {
 
     // Method to shoot a single arrow
     private static void shootSingleArrow(ServerLevel level, ServerPlayer player, Vec3 direction, float velocity, double damage, boolean isCritical) {
-        Arrow arrow = new Arrow(level, player);
-
+        AbstractArrow arrow = new Arrow(level, player);
         // Set arrow's position at the player's eye level
         arrow.setPos(player.getX(), player.getEyeY() - 0.1, player.getZ());
 
@@ -48,13 +45,12 @@ public class ArrowShooter {
 
         //arrow properties
         arrow.pickup = Arrow.Pickup.DISALLOWED;
-        arrow.setPierceLevel((byte)10);
 
         // Spawn the arrow in the world
         level.addFreshEntity(arrow);
+
     }
 
-    // Method to rotate a vector by a certain angle (in degrees)
     private static Vec3 rotateVector(Vec3 vec, double degrees) {
         double radians = Math.toRadians(degrees);
         double cos = Math.cos(radians);

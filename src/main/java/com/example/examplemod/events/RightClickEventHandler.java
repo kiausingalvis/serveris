@@ -10,18 +10,19 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 import static com.example.examplemod.utils.ArrowShooter.shootArrow;
+import static com.example.examplemod.utils.UNIQUEID_RETRIEVE.getUniqueId;
 
 @Mod.EventBusSubscriber(modid = "examplemod") // Replace "yourmodid" with your actual mod ID
 public class RightClickEventHandler {
     @SubscribeEvent
     public static void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
         Player player = event.getEntity().createCommandSourceStack().getPlayer();
-        System.out.println("right clicked");
-        System.out.println(player.getMainHandItem().getDisplayName().getString());
-
-        if(player.getMainHandItem().getDisplayName().getString().equals("[BYBYSS]")){
-            System.out.println("should shoot");
+        if(getUniqueId(player.getMainHandItem()).equals("PIMPALAS")){
+            shootArrow((ServerPlayer) player, 10f);
+        }
+        if(getUniqueId(player.getMainHandItem()).equals("TERMINATOR")){
             shootArrow((ServerPlayer) player, 10f);
         }
     }
+   
 }

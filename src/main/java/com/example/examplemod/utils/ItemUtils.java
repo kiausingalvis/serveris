@@ -1,11 +1,15 @@
 package com.example.examplemod.utils;
 
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.StringTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
+
+import java.util.List;
 
 public class ItemUtils {
 
@@ -43,4 +47,11 @@ public class ItemUtils {
             player.inventoryMenu.broadcastChanges();
         }
 }
+    public static void setItemLore(ItemStack itemStack, List<Component> lore) {
+        ListTag loreTag = new ListTag();
+        for (Component loreComponent : lore) {
+            loreTag.add(StringTag.valueOf(Component.Serializer.toJson(loreComponent)));
+        }
+        itemStack.getOrCreateTagElement("display").put("Lore", loreTag);
+    }
 }
