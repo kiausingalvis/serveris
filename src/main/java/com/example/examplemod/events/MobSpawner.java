@@ -18,7 +18,8 @@ public class MobSpawner {
         if (mob != null) {
             mob.setPos(position.x, position.y, position.z);
             if (displayName != null && !displayName.isEmpty()) {
-                mob.setCustomName(Component.literal(displayName+hp));
+                Component nameComponent = Component.literal(displayName).append("\n").append(Component.literal("HP: " + hp));
+                mob.setCustomName(nameComponent);
                 mob.setCustomNameVisible(true);
             }
             AttributeInstance maxHealthAttr = mob.getAttribute(Attributes.MAX_HEALTH);
