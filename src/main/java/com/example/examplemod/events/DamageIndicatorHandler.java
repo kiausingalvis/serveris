@@ -15,6 +15,7 @@ import net.minecraft.network.chat.Component;
 import java.util.concurrent.TimeUnit;
 
 import static com.example.examplemod.ExampleMod.MODID;
+import static com.example.examplemod.events.Delay.schedule;
 
 @Mod.EventBusSubscriber(modid = MODID)
 public class DamageIndicatorHandler {
@@ -53,17 +54,11 @@ public class DamageIndicatorHandler {
         // Add the armor stand to the world
         world.addFreshEntity(armorStand);
 
-        // Schedule the removal of the armor stand after a short delay (e.g., 20 ticks = 1 second)
-        MinecraftServer server = world.getServer();
-        if (server != null) {
-            server.submitAsync(() -> {
-                try {
-                    TimeUnit.SECONDS.sleep(1);
-                    armorStand.remove(Entity.RemovalReason.DISCARDED);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            });
-        }
+        schedule( 20, () -> {
+            if (armorStand != null && armorStand.isAlive()) {
+                armorStand.remove(Entity.RemovalReason.DISCARDED); // Remove the armor stand
+            }
+        });
+
     }
 }
