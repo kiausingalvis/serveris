@@ -6,60 +6,36 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.phys.Vec3;
+import static com.example.examplemod.utils.ClientSoundUtils.sendClientSound;
+import static com.example.examplemod.utils.AddItemCooldown.addCooldownToItem;
 
 public class ArrowShooter {
-
     public static void shootArrow(ServerPlayer player, Float arrowdamage) {
-        // Get the level (world) where the player is located
         ServerLevel level = player.getLevel();
-
-        // Get the direction the player is looking
         Vec3 lookVector = player.getLookAngle();
-        
         shootSingleArrow(level, player, lookVector, 3.0F, arrowdamage, false);
-
         Vec3 leftArrowVector = rotateVector(lookVector, -5);
         shootSingleArrow(level, player, leftArrowVector, 3.0F, arrowdamage, false);
-
-        // Shoot one arrow 15 degrees to the right
         Vec3 rightArrowVector = rotateVector(lookVector, 5);
         shootSingleArrow(level, player, rightArrowVector, 3.0F, arrowdamage, false);
-
-        // Optionally: Play a sound for shooting the arrows
-        player.getLevel().playSound(null, player.getX(), player.getY(), player.getZ(),
-                SoundEvents.EXPERIENCE_ORB_PICKUP, player.getSoundSource(), 1.0F, 1.0F);
+        sendClientSound(player, SoundEvents.EXPERIENCE_ORB_PICKUP,1,1);
+        addCooldownToItem(player, player.getMainHandItem().getItem(), 10);
     }
-
-    // Method to shoot a single arrow
     private static void shootSingleArrow(ServerLevel level, ServerPlayer player, Vec3 direction, float velocity, double damage, boolean isCritical) {
         AbstractArrow arrow = new Arrow(level, player);
-        // Set arrow's position at the player's eye level
         arrow.setPos(player.getX(), player.getEyeY() - 0.1, player.getZ());
-
-        // Shoot the arrow in the given direction with the specified velocity
         arrow.shoot(direction.x, direction.y, direction.z, velocity, 1.0F);//
-
-        // Set damage and critical hit status
         arrow.setBaseDamage(damage);
         arrow.setCritArrow(isCritical);
-
-        //arrow properties
         arrow.pickup = Arrow.Pickup.DISALLOWED;
-
-        // Spawn the arrow in the world
         level.addFreshEntity(arrow);
-
     }
-
     private static Vec3 rotateVector(Vec3 vec, double degrees) {
         double radians = Math.toRadians(degrees);
         double cos = Math.cos(radians);
         double sin = Math.sin(radians);
-
-        // Rotate around the Y axis for a horizontal spread (ignoring Y component for simplicity)
         double newX = vec.x * cos - vec.z * sin;
         double newZ = vec.x * sin + vec.z * cos;
-
         return new Vec3(newX, vec.y, newZ);
     }
 }

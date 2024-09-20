@@ -31,7 +31,7 @@ public class Config {
     public static class PlayerBank {
         private static final Map<UUID, Integer> playerBalances = new HashMap<>();
         private static final Gson gson = new Gson();
-        private static final String DATA_FILE = "player_balances.json";
+        private static final String DATA_FILE = "run/config/PlayerConfigData/player_balances.json";
 
         public static int getBalance(Player player) {
             return playerBalances.getOrDefault(player.getUUID(), 0);
@@ -70,7 +70,7 @@ public class Config {
     public static class MiningSkill {
         private static final Map<UUID, Integer> playerMiningSkill = new HashMap<>();
         private static final Gson gson = new Gson();
-        private static final String DATA_FILE = "player_mining_skill.json";
+        private static final String DATA_FILE = "run/config/PlayerConfigData/player_mining_skill.json";
 
         public static int getMiningXp(Player player) {
             return playerMiningSkill.getOrDefault(player.getUUID(), 0);

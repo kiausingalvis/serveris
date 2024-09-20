@@ -8,7 +8,9 @@ import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = "examplemod")
+import static com.example.examplemod.ExampleMod.MODID;
+
+@Mod.EventBusSubscriber(modid = MODID)
 public class AnvilRenameHandler {
 
     @SubscribeEvent

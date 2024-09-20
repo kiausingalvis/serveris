@@ -9,7 +9,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -17,7 +16,6 @@ import net.minecraftforge.fml.common.Mod;
 import java.util.List;
 
 import static com.example.examplemod.utils.ClientMessage.sendClientMessage;
-import static com.example.examplemod.utils.ClientMessage.sendServerMessage;
 
 @Mod.EventBusSubscriber(modid = ExampleMod.MODID)
 public class Mining {

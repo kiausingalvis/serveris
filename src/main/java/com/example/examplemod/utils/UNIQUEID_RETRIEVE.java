@@ -1,7 +1,5 @@
 package com.example.examplemod.utils;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 
@@ -23,6 +21,6 @@ public class UNIQUEID_RETRIEVE {
                 }
             }
         }
-        return "NONE"; // Return null if no UniqueId is found
+        return "NONE";
     }
 }

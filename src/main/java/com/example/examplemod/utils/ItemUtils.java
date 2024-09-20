@@ -22,23 +22,13 @@ public class ItemUtils {
      * @return The modified ItemStack with custom NBT data.
      */
     public static ItemStack addCustomNBTData(Item item, Component displayName, String uniqueId) {
-        // Create a new ItemStack with the given item
         ItemStack stack = new ItemStack(item);
-
-        // Get or create the NBT tag
         CompoundTag tag = stack.getOrCreateTag();
-
-        // Set the display name
         stack.setHoverName(displayName);
-
-        // Set the custom NBT data
         CompoundTag customTag = tag.getCompound("CustomTag");
         customTag.putString("UniqueId", uniqueId);
-
-        // Apply the custom tag to the item stack
         tag.put("CustomTag", customTag);
         stack.setTag(tag);
-
         return stack;
     }
     public static void giveCustomItemToPlayer(ServerPlayer player, ItemStack itemStack) {
