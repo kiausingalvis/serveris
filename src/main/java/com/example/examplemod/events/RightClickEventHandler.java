@@ -31,7 +31,8 @@ public class RightClickEventHandler {
             shootArrow(player, 10f);
         }
         if(getUniqueId(player.getMainHandItem()).equals("TERMINATOR")){
-            shootArrow(player, (float)CalculateDamage.DamageCalculationMelee(loadItemData("TERMINATOR").getDamage(),loadItemData("TERMINATOR").getStrength(),loadItemData("TERMINATOR").getCritDmg()));
+            //shootArrow(player, (float)CalculateDamage.DamageCalculationMelee(loadItemData("TERMINATOR").getDamage(),loadItemData("TERMINATOR").getStrength(),loadItemData("TERMINATOR").getCritDmg()));
+        shootArrow(player, 0.1f);
         }
         if(getUniqueId(player.getMainHandItem()).equals("PIDERELLA")){
             TeleportBlocksLookAngle(player,8);
@@ -39,5 +40,14 @@ public class RightClickEventHandler {
             teleportIfCrouchRightClick(player, player.getUsedItemHand());
         }
     }
-   
+   @SubscribeEvent
+    public static void onBlockRightClick(PlayerInteractEvent.RightClickBlock event){
+        ServerPlayer player = (ServerPlayer) event.getEntity();
+        if(getUniqueId(player.getMainHandItem()).equals("PIDERELLA")){
+            TeleportBlocksLookAngle(player,8);
+            addCooldownToItem(player, player.getMainHandItem().getItem(), 2);
+            teleportIfCrouchRightClick(player, player.getUsedItemHand());
+            event.setCanceled(true);
+        }
+   }
 }

@@ -21,16 +21,19 @@ public class ItemUtils {
      * @param uniqueId A unique identifier for the item.
      * @return The modified ItemStack with custom NBT data.
      */
-    public static ItemStack addCustomNBTData(Item item, Component displayName, String uniqueId) {
+    public static ItemStack addCustomNBTData(Item item, Component displayName, String uniqueId, String rune, String enchants) {
         ItemStack stack = new ItemStack(item);
         CompoundTag tag = stack.getOrCreateTag();
         stack.setHoverName(displayName);
         CompoundTag customTag = tag.getCompound("CustomTag");
         customTag.putString("UniqueId", uniqueId);
+        customTag.putString("Rune", rune);
+        customTag.putString("Enchants", enchants);
         tag.put("CustomTag", customTag);
         stack.setTag(tag);
         return stack;
     }
+
     public static void giveCustomItemToPlayer(ServerPlayer player, ItemStack itemStack) {
         if (player.level instanceof ServerLevel serverLevel) {
             player.getInventory().add(itemStack);

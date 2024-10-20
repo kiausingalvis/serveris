@@ -39,17 +39,17 @@ public class DamageIndicatorHandler {
     private static void spawnDamageIndicator(ServerLevel world, Vec3 position, float damage) {
         // Create an armor stand for the floating text
         ArmorStand armorStand = new ArmorStand(EntityType.ARMOR_STAND, world);
-        armorStand.setPos(position.x, position.y + 1.5, position.z); // Slightly above the mob
+        armorStand.setPos(position.x, position.y+1, position.z); // Slightly above the mob
 
         // Set the text (damage amount) as the custom name
-        Component damageText = Component.literal("§c-" + damage); // Red text
+        Component damageText = Component.literal("§c§l-" + (int)damage); // Red text
         armorStand.setCustomName(damageText);
         armorStand.setCustomNameVisible(true);
 
         // Armor stand settings to make it invisible, small, and non-interactive
         armorStand.setInvisible(true);
         armorStand.setInvulnerable(true);
-        armorStand.setNoGravity(true);// Makes it tiny and non-collidable
+        armorStand.setNoGravity(true);
 
         // Add the armor stand to the world
         world.addFreshEntity(armorStand);

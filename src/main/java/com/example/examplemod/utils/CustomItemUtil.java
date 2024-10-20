@@ -13,13 +13,13 @@ import com.example.examplemod.ItemConfigManager;
 
 public class CustomItemUtil {
 
-    public static void giveCustomItem(ServerPlayer player, String ID, Item ITEM, String DisplayName, String Description, String ItemAbility, String rarity,int Damage, int Strength, int AttackSpeed, int CritDmg, int CritChance,int Intelligence, int ItemCooldown, boolean AddSpecialAbility,String SpecialAbilityCombo, String specialAbilityDescription) {
+    public static void giveCustomItem(ServerPlayer player, String ID, Item ITEM, String DisplayName, String Description, String ItemAbility, String rarity,int Damage, int Strength, int AttackSpeed, int CritDmg, int CritChance,int Intelligence, int ItemCooldown, boolean AddSpecialAbility,String SpecialAbilityCombo, String specialAbilityDescription, String rune, String DragonTracer) {
         Item item = ITEM;
         Component displayName = Component.literal(DisplayName).withStyle(getDisplayNameColor(rarity));
         String uniqueId = ID;
-        ItemStack customStack = ItemUtils.addCustomNBTData(item, displayName, uniqueId);
+        ItemStack customStack = ItemUtils.addCustomNBTData(item, displayName, uniqueId, rune, DragonTracer);
         CompoundTag tag = customStack.getOrCreateTag();
-        tag.putInt("HideFlags", 34);
+        tag.putInt("HideFlags", 254);
         customStack.setTag(tag);
         List<Component> lore = new ArrayList<>();
 
@@ -42,6 +42,9 @@ public class CustomItemUtil {
             lore.add(Component.literal("§7"+specialAbilityDescription));
             lore.add(Component.literal(""));
         }
+        if(!rune.isEmpty()){
+            lore.add(Component.literal("§r§8Rune: §7"+rune));
+        }
         lore.add(getRarityComponent(rarity));
         ItemUtils.setItemLore(customStack, lore);
         ItemUtils.giveCustomItemToPlayer(player, customStack);
@@ -51,7 +54,7 @@ public class CustomItemUtil {
         Item item = ITEM;
         Component displayName = Component.translatable(DisplayName).withStyle(getDisplayNameColor(rarity));
         String uniqueId = ID;
-        ItemStack customStack = ItemUtils.addCustomNBTData(item, displayName, uniqueId);
+        ItemStack customStack = ItemUtils.addCustomNBTData(item, displayName, uniqueId, "", "");
         List<Component> lore = new ArrayList<>();
 
         lore.add(Component.literal("§7Health: +"+Health));
@@ -102,7 +105,7 @@ public class CustomItemUtil {
         Item item = ITEM;
         Component displayName = Component.literal(DisplayName).withStyle(getDisplayNameColor(rarity));
         String uniqueId = ID;
-        ItemStack customStack = ItemUtils.addCustomNBTData(item, displayName, uniqueId);
+        ItemStack customStack = ItemUtils.addCustomNBTData(item, displayName, uniqueId, "", "");
         ItemConfigManager.saveItemData(uniqueId, Damage, Strength, AttackSpeed, CritDmg, CritChance, Intelligence);
     }
 

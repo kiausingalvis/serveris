@@ -16,10 +16,10 @@ public class CustomChatEvent {
         ServerPlayer player = event.getPlayer();
         String originalMessage = event.getMessage().getString();
         String playerName = player.getName().getString();
-        Component customMessage = Component.literal("§4[GANDON]")
-                .append(Component.literal(" §2"+playerName))
+        Component customMessage = Component.literal("§9[SUDVABALIS] ")
+                .append(Component.literal("§b"+playerName))
                 .append(Component.literal("§f: "))
-                .append(Component.literal("§6"+originalMessage));
+                .append(Component.literal("§d"+originalMessage));
 
         event.setCanceled(true);
         sendServerMessageAsComponent(event.getPlayer().server, customMessage);

@@ -26,7 +26,8 @@ public class SpawnZombie {
     public static int SpawnZombie(CommandSourceStack source){
         Player player = source.getPlayer();
         Vec3 position = new Vec3(player.getX(), player.getY()+5,player.getZ());
-        spawnMob(source.getLevel(), EntityType.WITHER_SKELETON,  position, "GAIDYS", 200, "GAIDYS");
+        spawnMob(source.getLevel(), EntityType.WITHER_SKELETON,  position, "GAIDYS", 200, "GAIDYS", 3);
+        //spawnMob(source.getLevel(), EntityType.ZOMBIE,  position, "DEBIL", 1000, "DEBIL", 30);
         return 1;
     }
 

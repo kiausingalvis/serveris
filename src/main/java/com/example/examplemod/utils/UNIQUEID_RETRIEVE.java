@@ -23,4 +23,29 @@ public class UNIQUEID_RETRIEVE {
         }
         return "NONE";
     }
+
+    public static String getRuneName(ItemStack itemStack) {
+        if (itemStack.hasTag()) {
+            CompoundTag tag = itemStack.getTag();
+            if (tag != null && tag.contains("CustomTag")) {
+                CompoundTag customTag = tag.getCompound("CustomTag");
+                if (customTag.contains("Rune")) {
+                    return customTag.getString("Rune");
+                }
+            }
+        }
+        return "NONE";
+    }
+    public static String getEnchants(ItemStack itemStack) {
+        if (itemStack.hasTag()) {
+            CompoundTag tag = itemStack.getTag();
+            if (tag != null && tag.contains("CustomTag")) {
+                CompoundTag customTag = tag.getCompound("CustomTag");
+                if (customTag.contains("Enchants")) {
+                    return customTag.getString("Enchants");
+                }
+            }
+        }
+        return "NONE";
+    }
 }
