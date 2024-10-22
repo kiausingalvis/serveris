@@ -34,7 +34,7 @@ public class MobSpawner {
                 tag.putString("UniqueID", customTag);
                 mob.getPersistentData().merge(tag);
             }
-            mob.setNoAi(true);
+            //mob.setNoAi(true);
             world.addFreshEntity(mob);
 
         }

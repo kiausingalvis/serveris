@@ -25,7 +25,8 @@ import java.util.concurrent.CompletableFuture;
 import static com.example.examplemod.events.MobSpawner.spawnMob;
 import static com.example.examplemod.utils.CircleEffect.startRadius;
 import static com.example.examplemod.utils.CustomItemUtil.giveCustomItem;
-import static com.example.examplemod.worlds.CustomWorldDimension.startF6;
+import static com.example.examplemod.worlds.WorldTeleporter.startF6;
+import static com.example.examplemod.utils.CustomItemUtil.giveCustomItem;
 @Mod.EventBusSubscriber
 public class VdleTestCommand {
 
@@ -64,6 +65,9 @@ public class VdleTestCommand {
             case "startf6":
                 startF6(Objects.requireNonNull(source.getPlayer()));
                 break;
+            case "aotv":
+                giveCustomItem(source.getPlayer(), "PIDERELLA", Items.DIAMOND_SHOVEL, "PIDERELLA", "teleports you x amount of blocks", "teleport a few blocks on right click", "RARE", 2011, 11, 0, 0, 0, 9,40,true, "SHIFT + RIGHT CLICK", "Teleports you 5693 amount of blocks", "","no");
+                break;
             default:
                 source.sendFailure(Component.literal("Unknown feature: " + feature));
                 break;
@@ -76,6 +80,7 @@ public class VdleTestCommand {
         builder.suggest("radius");
         builder.suggest("summondrag");
         builder.suggest("startf6");
+        builder.suggest("aotv");
         return builder.buildFuture();
     }
 }

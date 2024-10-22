@@ -32,7 +32,7 @@ public class RightClickEventHandler {
         }
         if(getUniqueId(player.getMainHandItem()).equals("TERMINATOR")){
             //shootArrow(player, (float)CalculateDamage.DamageCalculationMelee(loadItemData("TERMINATOR").getDamage(),loadItemData("TERMINATOR").getStrength(),loadItemData("TERMINATOR").getCritDmg()));
-        shootArrow(player, 0.1f);
+        shootArrow(player, 5f);
         }
         if(getUniqueId(player.getMainHandItem()).equals("PIDERELLA")){
             TeleportBlocksLookAngle(player,8);
