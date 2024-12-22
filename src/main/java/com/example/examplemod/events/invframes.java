@@ -23,6 +23,7 @@ public class invframes {
             entity.hurtTime = 0;
             entity.invulnerableTime=0;
             entity.setInvulnerable(false);
+            entity.setArrowCount(0);
             entity.removeArrowTime=0;
             System.out.println(entity.getAttributes());
         }

@@ -47,6 +47,7 @@ public class Config {
 
         public static void loadBalances() {
             try {
+                System.out.println(Paths.get(DATA_FILE) + "PATH!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 if (Files.exists(Paths.get(DATA_FILE))) {
                     Reader reader = Files.newBufferedReader(Paths.get(DATA_FILE));
                     Type type = new TypeToken<Map<UUID, Integer>>() {}.getType();
