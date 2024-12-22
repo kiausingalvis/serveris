@@ -19,13 +19,13 @@ public class FireworkUtils {
 
         // List of color combinations (each combo is an array of any length of colors)
         List<int[]> colorCombos = Arrays.asList(
-                new int[]{11743532, 15435844, 14602026},  // Combo 1 with 3 colors
-                new int[]{4312372, 3887386},              // Combo 2 with 2 colors
-                new int[]{6719955, 2437522, 8073150},     // Combo 3 with 3 colors
-                new int[]{12801229, 14188952},            // Combo 4 with 2 colors
-                new int[]{5320730},                       // Combo 5 with 1 color
-                new int[]{15790320, 11250603, 4408131, 1973019} // Combo 6 with 4 colors
-                // You can add more combos with different lengths here
+                new int[]{2651799, 2437522, 6719955, 8073150},
+                new int[]{8073150, 14188952, 12801229},
+                new int[]{15790320, 11250603, 4408131, 1973019},
+                new int[]{11743532, 15435844, 14602026},
+                new int[]{6719955, 2651799, 11743532},
+                new int[]{15790320, 1973019, 6719955, 2651799}
+
         );
 
         // Randomly select a color combo
