@@ -92,12 +92,16 @@ public class VdleTestCommand {
                 break;
             case "tnt":
                 giveCustomItem(source.getPlayer(), "TNTSTICK", Items.STICK, "TNT", "CLEAVE GO BRR", "CLEAVE", "EPIC", 0, 0, 0, 0, 0, 0,1,false, "", "", "","no");
+                break;
+            case "firework_wand":
+                giveCustomItem(source.getPlayer(), "FIREWORKWAND", Items.END_ROD, "FIREWORK WAND", "Sends fireworks!", "COLORFUL FIREWORKS", "MYTHIC", 0, 0, 0, 0, 0, 0,5,false, "", "", "","no");
             default:
                 source.sendFailure(Component.literal("Unknown feature: " + feature));
                 break;
         }
         return Command.SINGLE_SUCCESS;
     }
+
 
     private static CompletableFuture<Suggestions>suggestFeatureOptions(SuggestionsBuilder builder) {
         builder.suggest("terms");

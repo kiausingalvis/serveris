@@ -3,6 +3,7 @@ package com.example.examplemod.events;
 import com.example.examplemod.ItemConfigManager;
 import com.example.examplemod.SukunaCleave;
 import com.example.examplemod.utils.CalculateDamage;
+import com.example.examplemod.utils.FireworkUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
@@ -55,6 +56,10 @@ public class RightClickEventHandler {
             tnt.setPos(player.getX(), player.getY(), player.getZ());
             tnt.setFuse(0);
             player.getLevel().addFreshEntity(tnt);
+        }
+        if(getUniqueId(player.getMainHandItem()).equals("FIREWORKWAND")){
+            FireworkUtils.spawnInstantFirework(player);
+            addCooldownToItem(player, player.getMainHandItem().getItem(), 5);
         }
 
     }
