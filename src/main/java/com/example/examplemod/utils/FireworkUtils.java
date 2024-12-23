@@ -25,32 +25,45 @@ public class FireworkUtils {
                 new int[]{11743532, 15435844, 14602026},
                 new int[]{6719955, 2651799, 11743532},
                 new int[]{15790320, 1973019, 6719955, 2651799}
-
         );
 
         // Randomly select a color combo
         Random random = new Random();
         int[] selectedCombo = colorCombos.get(random.nextInt(colorCombos.size()));
 
-        // Use the selected combo to spawn the firework (same as before)
+        // Create firework item with custom colors
         ItemStack fireworkItem = new ItemStack(Items.FIREWORK_ROCKET);
-        fireworkItem.getOrCreateTag().put("Fireworks", new net.minecraft.nbt.CompoundTag());
-        var explosionsTag = fireworkItem.getTag().getCompound("Fireworks").getList("Explosions", 10);
+        var fireworkTag = fireworkItem.getOrCreateTagElement("Fireworks");
+        var explosionsTag = new net.minecraft.nbt.ListTag();
+
         var explosion = new net.minecraft.nbt.CompoundTag();
         explosion.putIntArray("Colors", selectedCombo);
         explosion.putByte("Type", (byte) 0); // 0 = small ball (no fade)
         explosionsTag.add(explosion);
-        fireworkItem.getTag().getCompound("Fireworks").put("Explosions", explosionsTag);
+
+        fireworkTag.put("Explosions", explosionsTag);
+
+        // Set a low flight duration to reduce normal lifespan
+        fireworkTag.putByte("Flight", (byte) 1); // Flight duration 1 corresponds to a short lifespan
 
         // Calculate the position 5 blocks in front of the player
         Vec3 lookDirection = player.getLookAngle().scale(5);
-        Vec3 spawnPos = player.position().add(lookDirection.x, lookDirection.y, lookDirection.z);
+        Vec3 spawnPos = player.position().add(lookDirection.x, lookDirection.y+1.5, lookDirection.z);
 
-        // Create and spawn the firework entity at the calculated position
+        // Create the firework entity
         FireworkRocketEntity firework = new FireworkRocketEntity(level, spawnPos.x, spawnPos.y, spawnPos.z, fireworkItem);
-        firework.setSilent(true); // Disable sound
-        firework.setNoGravity(true); // No gravity, so it doesn't fly
-        level.addFreshEntity(firework); // Spawn the firework entity
 
+        try {
+            // Use reflection to set the firework's life to exceed its lifespan
+            var lifeField = FireworkRocketEntity.class.getDeclaredField("life");
+            lifeField.setAccessible(true);
+            lifeField.setInt(firework, 99); // Set life to a value that ensures instant explosion
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        // Spawn the firework entity
+        level.addFreshEntity(firework);
     }
+
 }

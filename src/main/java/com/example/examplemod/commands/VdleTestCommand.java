@@ -3,6 +3,7 @@ package com.example.examplemod.commands;
 import com.example.examplemod.CleaveEffect;
 import com.example.examplemod.SkinManager;
 import com.example.examplemod.SukunaCleave;
+import com.example.examplemod.chestgui.ChestUtils;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
@@ -16,12 +17,14 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.items.ItemStackHandler;
 
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
@@ -29,6 +32,7 @@ import java.util.concurrent.CompletableFuture;
 import static com.example.examplemod.events.MobSpawner.spawnMob;
 import static com.example.examplemod.utils.CircleEffect.startRadius;
 import static com.example.examplemod.utils.ClientMessage.*;
+import static com.example.examplemod.utils.CustomItemUtil.giveCustomArmor;
 import static com.example.examplemod.utils.CustomItemUtil.giveCustomItem;
 import static com.example.examplemod.worlds.WorldTeleporter.startF6;
 
@@ -95,6 +99,22 @@ public class VdleTestCommand {
                 break;
             case "firework_wand":
                 giveCustomItem(source.getPlayer(), "FIREWORKWAND", Items.END_ROD, "FIREWORK WAND", "Sends fireworks!", "COLORFUL FIREWORKS", "MYTHIC", 0, 0, 0, 0, 0, 0,5,false, "", "", "","no");
+                break;
+            case "cumblaster":
+                giveCustomItem(source.getPlayer(), "CUMBLASTER", Items.SUGAR, "CUM BLASTER", "Sends Cum!", "get cummed on ☠", "PIMPALAS", 0, 0, 0, 0, 0, 0,0,false, "", "", "","no");
+                break;
+            case "hearthelmet":
+                giveCustomArmor(source.getPlayer(), "HEARTHELMET", Items.GOLDEN_HELMET, "HEART HELMET", "dfgslhkgsflkhljkhdgff", "LEGENDARY", 0, 0,0,0,0,0,0,0);
+                break;
+            case "chest":
+                ItemStackHandler chestContents = new ItemStackHandler(54);
+                for (int i = 0; i < 54; i++) {
+                    if (i % 9 == 0) {
+                        chestContents.setStackInSlot(i, new ItemStack(Items.DIAMOND));
+                    }
+                }
+                ChestUtils.openDoubleChest(source.getPlayer(), chestContents, "SHOP");
+                break;
             default:
                 source.sendFailure(Component.literal("Unknown feature: " + feature));
                 break;
