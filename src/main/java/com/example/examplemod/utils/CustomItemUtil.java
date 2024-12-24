@@ -101,12 +101,13 @@ public class CustomItemUtil {
         };
         return color;
     }
-    public static void giveCustomItem(ServerPlayer player, String ID, Item ITEM, String DisplayName, String Description, String ItemAbility, String rarity, int Damage, int Strength, int AttackSpeed, int CritDmg, int CritChance, int Intelligence) {
+    public static ItemStack giveCustomItem(ServerPlayer player, String ID, Item ITEM, String DisplayName, String Description, String ItemAbility, String rarity, int Damage, int Strength, int AttackSpeed, int CritDmg, int CritChance, int Intelligence) {
         Item item = ITEM;
         Component displayName = Component.literal(DisplayName).withStyle(getDisplayNameColor(rarity));
         String uniqueId = ID;
         ItemStack customStack = ItemUtils.addCustomNBTData(item, displayName, uniqueId, "", "");
         ItemConfigManager.saveItemData(uniqueId, Damage, Strength, AttackSpeed, CritDmg, CritChance, Intelligence);
+        return customStack;
     }
 
 }
