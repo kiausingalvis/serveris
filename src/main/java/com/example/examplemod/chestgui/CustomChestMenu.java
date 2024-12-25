@@ -5,13 +5,16 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.inventory.SimpleContainerData;
-import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.*;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.items.ItemStackHandler;
+
+import java.util.Objects;
+
+import static com.example.examplemod.utils.ClientMessage.sendClientMessage;
 
 public class CustomChestMenu extends AbstractContainerMenu {
     private final SimpleContainer container;
@@ -89,7 +92,9 @@ public class CustomChestMenu extends AbstractContainerMenu {
         player.openMenu(new SimpleMenuProvider((id, playerInventory, p) ->
                 new CustomChestMenu(id, playerInventory, container),
                 Component.literal(containerName)));
+
     }
+
 
     // Custom slot to prevent item pickup and placement
     public static class LockedSlot extends Slot {
@@ -104,7 +109,13 @@ public class CustomChestMenu extends AbstractContainerMenu {
 
         @Override
         public boolean mayPickup(net.minecraft.world.entity.player.Player player) {
-            return false; // Prevent picking up items
+            if(this.getItem().getShareTag().get("UniqueID") == null){
+                return false;
+            }
+            if(this.getItem().getTag().get("UniqueID").getAsString().equals("COMBAT_SKILL_MENU")){
+                CustomItems.mainmenu((ServerPlayer) player);
+            }
+            return false;
         }
     }
     public static void openChestGUI(ServerPlayer player, ItemStackHandler containerContens, String containerName) {

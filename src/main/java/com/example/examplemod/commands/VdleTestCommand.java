@@ -12,8 +12,12 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
+import com.mojang.datafixers.types.templates.Tag;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.IntArrayTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
@@ -108,23 +112,6 @@ public class VdleTestCommand {
             case "hearthelmet":
                 giveCustomArmor(source.getPlayer(), "HEARTHELMET", Items.GOLDEN_HELMET, "HEART HELMET", "dfgslhkgsflkhljkhdgff", "LEGENDARY", 0, 0,0,0,0,0,0,0);
                 break;
-            case "chest":
-                ItemStack noNameGlass = (renameItem(new ItemStack(Items.BLACK_STAINED_GLASS_PANE), ""));
-                ItemStack gay = giveCustomItem(source.getPlayer(), "CUMBLASTER", Items.SUGAR, "CUM BLASTER", "SDGFdga", "aGdag", "LEGENDARY", 1,1,1,1,1,1);
-                ItemStack gay1 = giveCustomItem(source.getPlayer(), "FIREWORKWAND", Items.SUGAR, "WAND", "SDGFdga", "aGdag", "LEGENDARY", 1,1,1,1,1,1);
-
-                ItemStackHandler chestContents = new ItemStackHandler(54);
-                for (int i = 0; i < 54; i++) {
-                    if (i % 9 == 0 || i % 9 == 8 || i < 9 || i >= 45) {
-                        chestContents.setStackInSlot(i, noNameGlass);
-                    }
-                }
-                chestContents.setStackInSlot(22, gay);
-                chestContents.setStackInSlot(23, gay1);
-
-
-                CustomChestMenu.openChestGUI(source.getPlayer(), chestContents, "§2TESTING");
-                break;
             default:
                 source.sendFailure(Component.literal("Unknown feature: " + feature));
                 break;
@@ -145,5 +132,30 @@ public class VdleTestCommand {
     public static ItemStack renameItem(ItemStack itemStack, String newName) {
         itemStack.setHoverName(Component.literal(newName));
         return itemStack;
+    }
+    public static ItemStack createCustomHead(String headvalue) {
+        // Create a new ItemStack for the player head
+        ItemStack head = new ItemStack(Items.PLAYER_HEAD);
+
+        // Get the ItemStack's NBT tag
+        CompoundTag skullOwnerTag = new CompoundTag();
+        skullOwnerTag.put("Id", new IntArrayTag(new int[]{897231674, -1935714815, -1916553771, -381563487}));
+
+        // Set the texture property
+        CompoundTag propertiesTag = new CompoundTag();
+        ListTag texturesList = new ListTag();
+        CompoundTag textureEntry = new CompoundTag();
+        textureEntry.putString("Value", headvalue);
+        texturesList.add(textureEntry);
+        propertiesTag.put("textures", texturesList);
+
+        skullOwnerTag.put("Properties", propertiesTag);
+
+        // Set the SkullOwner tag in the ItemStack
+        CompoundTag tag = head.getOrCreateTag();
+        tag.put("SkullOwner", skullOwnerTag);
+        head.setTag(tag);
+
+        return head;
     }
 }
