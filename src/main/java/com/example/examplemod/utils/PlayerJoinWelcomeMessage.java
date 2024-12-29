@@ -15,6 +15,6 @@ public class PlayerJoinWelcomeMessage {
         if (event.getEntity() instanceof ServerPlayer player) {
             playerName = player.getName().getString();
         }
-        sendServerMessage(event.getEntity().getServer(), "§4§lWelcome: §c§l" + playerName +"§6§l 卐");
+        sendServerMessage(event.getEntity().getServer(), "§a§l+" + playerName);
     }
 }

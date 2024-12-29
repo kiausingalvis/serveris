@@ -31,7 +31,7 @@ public class ArcEffectItem extends Item {
         if (!(event.getEntity() instanceof ServerPlayer player)) return;
         ItemStack itemStack = event.getItemStack();
 
-        if (UNIQUEID_RETRIEVE.getUniqueId(itemStack).equals("CUMBLASTER")) {
+        if (UNIQUEID_RETRIEVE.getUniqueId(player.getMainHandItem()).equals("CUMBLASTER")) {
             event.setCanceled(true); // Prevent default action
             spawnParticleArc(player);
         }

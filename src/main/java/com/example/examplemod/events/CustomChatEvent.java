@@ -34,8 +34,8 @@ public class CustomChatEvent {
     @SubscribeEvent
     public static void onChat(ServerChatEvent event) {
         String originalMessage = event.getMessage().getString();
-        Component gradientMessage = Component.literal(originalMessage).setStyle(Style.EMPTY.withColor(0xFF5858));
-        Component rankname = GradientUtils.applyGradient("[Lv1 Gooner] "+event.getPlayer().getName().getString()+": ", 0x96004B, 0xFF5858);
+        Component gradientMessage = Component.literal(originalMessage).setStyle(Style.EMPTY.withColor(0xFFFFFF));
+        Component rankname = GradientUtils.applyGradient("[Lv1 Gooner] "+event.getPlayer().getName().getString()+": ", 0x7CFFE7, 0xFFFFFF);
 
         // Send the gradient message to the chat
         event.setCanceled(true);

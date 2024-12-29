@@ -72,5 +72,8 @@ public class RightClickEventHandler {
             teleportIfCrouchRightClick(player, player.getUsedItemHand());
             event.setCanceled(true);
         }
+       if(getUniqueId(player.getMainHandItem()).equals("FIREWORKWAND")){
+           event.setCanceled(true);
+       }
    }
 }
