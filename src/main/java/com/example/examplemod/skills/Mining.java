@@ -1,5 +1,6 @@
 package com.example.examplemod.skills;
 
+import com.example.examplemod.Config;
 import com.example.examplemod.ExampleMod;
 import com.example.examplemod.utils.AddEtherWarp;
 import net.minecraft.core.BlockPos;
@@ -36,7 +37,7 @@ public class Mining {
             250 //dmd block
 
     };
-    private static float MINING_LEVEL = 0.0f;
+    public static float MINING_LEVEL = 0.0f;
     private static final int[] MINING_LEVEL_XP = {
       0, 3000, 6000, 9000, 12000, 15000, 18000, 21000, 24000, 27000, 30000, 33000, 36000, 39000, 42000
     };
@@ -45,7 +46,7 @@ public class Mining {
 
     @SubscribeEvent
     public static void onBlockBreak(BlockEvent.BreakEvent event) {
-        int get_mining_xp = AddEtherWarp.Config.MiningSkill.getMiningXp(event.getPlayer());
+        int get_mining_xp = Config.getMiningXp(event.getPlayer());
         for(int a = 1; a<=MINING_LEVEL_XP.length;a++){
             if(get_mining_xp >= MINING_LEVEL_XP[a-1]){
                 MINING_LEVEL = a;
@@ -54,8 +55,8 @@ public class Mining {
         }
         for(int i = 1; i<=Blocks_with_xp.length;i++) {
             if (event.getState().getBlock() == Blocks_with_xp[i - 1]) {
-                AddEtherWarp.Config.MiningSkill.addMiningXp(event.getPlayer(), Blocks_given_xp[i - 1]);
-                System.out.println(event.getPlayer() + " mining xp: " + AddEtherWarp.Config.MiningSkill.getMiningXp(event.getPlayer())+ " Mining Level: " + MINING_LEVEL);
+                Config.addMiningXp(event.getPlayer(), Blocks_given_xp[i - 1]);
+                System.out.println(event.getPlayer() + " mining xp: " + Config.getMiningXp(event.getPlayer())+ " Mining Level: " + MINING_LEVEL);
                 sendClientMessage((ServerPlayer) event.getPlayer(), "§b+"+Blocks_given_xp[i-1]+" mining xp");
                 if (!event.getPlayer().isCreative() && !event.getLevel().isClientSide()) {
                     ServerLevel world = (ServerLevel) event.getLevel();

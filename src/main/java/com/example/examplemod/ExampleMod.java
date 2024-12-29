@@ -18,6 +18,5 @@ public class ExampleMod
         MinecraftForge.EVENT_BUS.register(new Mining());
         MinecraftForge.EVENT_BUS.register(Bank.class);
         MinecraftForge.EVENT_BUS.register(RightClickEventHandler.class);
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, AddEtherWarp.Config.SPEC);
     }
 }

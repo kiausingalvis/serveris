@@ -18,17 +18,14 @@ import java.util.List;
 
 @Mod.EventBusSubscriber
 public class CleaveEffect {
-    private static final double CLEAVE_RADIUS = 20.0; // Radius for the cleave effect
-    private static final float DAMAGE_AMOUNT = 0.1f; // Damage per tick
-    private static final int DURATION_TICKS = 200; // Effect duration (10 seconds)
+    private static final double CLEAVE_RADIUS = 20.0;
+    private static final float DAMAGE_AMOUNT = 0.1f;
+    private static final int DURATION_TICKS = 200;
 
-    // Active cleave effects (keyed by world)
     private static final List<CleaveInstance> activeCleaveEffects = new ArrayList<>();
 
     public static void start(ServerLevel world, Vec3 location, ServerPlayer player) {
         System.out.println("[DEBUG] Cleave effect started at: " + location);
-
-        // Add a new cleave instance
         activeCleaveEffects.add(new CleaveInstance(world, location, DURATION_TICKS, player));
     }
 

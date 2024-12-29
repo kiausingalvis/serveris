@@ -1,5 +1,7 @@
 package com.example.examplemod.events;
 
+import com.example.examplemod.utils.GradientUtils;
+import net.minecraft.network.chat.Style;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -11,7 +13,6 @@ import static com.example.examplemod.utils.ClientMessage.sendServerMessage;
 
 @Mod.EventBusSubscriber(modid = MODID)
 public class CustomChatEvent {
-    @SubscribeEvent
     public static void FormatMessage(ServerChatEvent event){
         String rankColor = "§4";
         String playerNameColor = "§c";
@@ -30,4 +31,19 @@ public class CustomChatEvent {
         }
 
     }
+    @SubscribeEvent
+    public static void onChat(ServerChatEvent event) {
+        String originalMessage = event.getMessage().getString();
+        Component gradientMessage = Component.literal(originalMessage).setStyle(Style.EMPTY.withColor(0xFF5858));
+        Component rankname = GradientUtils.applyGradient("[Lv1 Gooner] "+event.getPlayer().getName().getString()+": ", 0x96004B, 0xFF5858);
+
+        // Send the gradient message to the chat
+        event.setCanceled(true);
+        event.getPlayer().server.getPlayerList().broadcastSystemMessage(
+                Component.literal("")
+                        .append(rankname)
+                        .append(gradientMessage),
+                false
+        );
     }
+}

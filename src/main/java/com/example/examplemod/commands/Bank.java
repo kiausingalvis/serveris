@@ -1,5 +1,6 @@
 package com.example.examplemod.commands;
 
+import com.example.examplemod.Config;
 import com.example.examplemod.ItemConfigManager;
 import com.example.examplemod.utils.AddEtherWarp;
 import com.example.examplemod.utils.ClientMessage;
@@ -34,9 +35,9 @@ public class Bank {
 
         //giveCustomArmor(player, "GAMBLER_CHESTPLATE", netheriteChestplate, "GAMBLER'S CHESTPLATE", "Pimpalo Chestplate", "PIMPALAS", 69,69,69,69,69,69,69,69);
         //giveCustomItem(player, "PIDERELLA", albuGay, "PIDERELLA", "teleports you x amount of blocks", "teleport a few blocks on right click", "RARE", 2011, 11, 0, 0, 0, 9,40,true, "SHIFT + RIGHT CLICK", "Teleports you 5693 amount of blocks");
-        AddEtherWarp.Config.PlayerBank.getBalance(player);
+        Config.getBalance(player);
         System.out.println(ItemConfigManager.loadItemData("PIDERELLA").getDamage());
-        String formattedBankValue = String.format("%,d", AddEtherWarp.Config.PlayerBank.getBalance(player));
+        String formattedBankValue = String.format("%,d", Config.getBalance(player));
         source.sendSuccess(Component.literal("§2Your Bank Balance: §a" + formattedBankValue + "§2$"),true );
         return 1;
     }

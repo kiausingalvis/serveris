@@ -1,7 +1,6 @@
 package com.example.examplemod.commands;
 
 import com.example.examplemod.CleaveEffect;
-import com.example.examplemod.SkinManager;
 import com.example.examplemod.SukunaCleave;
 import com.example.examplemod.chestgui.CustomChestMenu;
 import com.example.examplemod.utils.CustomItemUtil;
@@ -124,7 +123,6 @@ public class VdleTestCommand {
         builder.suggest("terms");
         builder.suggest("radius");
         builder.suggest("summondrag");
-        builder.suggest("startf6");
         builder.suggest("aotv");
         builder.suggest("weapon");
         return builder.buildFuture();

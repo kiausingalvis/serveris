@@ -39,6 +39,7 @@ public class MainGui {
         noNameGlass.getOrCreateTag().putString("UniqueID", "MENU_GLASS");
         noNameGlass_black.getOrCreateTag().putString("UniqueID", "MENU_GLASS");
         combatSkillIcon.getOrCreateTag().putString("UniqueID", "COMBAT_SKILL_MENU");
+        miningSkillIcon.getOrCreateTag().putString("UniqueID", "MINING_SKILL_MENU");
         ItemStack.TooltipPart[] hideshit = {ItemStack.TooltipPart.ADDITIONAL, ItemStack.TooltipPart.UNBREAKABLE, ItemStack.TooltipPart.CAN_DESTROY, ItemStack.TooltipPart.CAN_PLACE, ItemStack.TooltipPart.DYE, ItemStack.TooltipPart.ENCHANTMENTS, ItemStack.TooltipPart.UNBREAKABLE, ItemStack.TooltipPart.MODIFIERS};
         for(int i=0; i< hideshit.length;i++){
             miningSkillIcon.hideTooltipPart(hideshit[i]);

@@ -1,21 +1,13 @@
 package com.example.examplemod.chestgui;
 
-import com.mojang.brigadier.CommandDispatcher;
-import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.commands.Commands;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.event.RegisterCommandsEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.items.ItemStackHandler;
 
-import static com.example.examplemod.commands.VdleTestCommand.createCustomHead;
 import static com.example.examplemod.commands.VdleTestCommand.renameItem;
 
-public class CustomItems {
+public class CombatSkillMenu {
         public static int mainmenu(ServerPlayer player){
             ItemStack noNameGlass = (renameItem(new ItemStack(Items.CYAN_STAINED_GLASS_PANE), ""));
             noNameGlass.getOrCreateTag().putString("UniqueID", "MENU_GLASS");

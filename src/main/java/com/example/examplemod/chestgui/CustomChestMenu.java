@@ -5,16 +5,9 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraftforge.items.ItemStackHandler;
-
-import java.util.Objects;
-
-import static com.example.examplemod.utils.ClientMessage.sendClientMessage;
 
 public class CustomChestMenu extends AbstractContainerMenu {
     private final SimpleContainer container;
@@ -113,7 +106,10 @@ public class CustomChestMenu extends AbstractContainerMenu {
                 return false;
             }
             if(this.getItem().getTag().get("UniqueID").getAsString().equals("COMBAT_SKILL_MENU")){
-                CustomItems.mainmenu((ServerPlayer) player);
+                CombatSkillMenu.mainmenu((ServerPlayer) player);
+            }
+            if(this.getItem().getTag().get("UniqueID").getAsString().equals("MINING_SKILL_MENU")){
+                MiningSkillMenu.mainmenu((ServerPlayer) player);
             }
             return false;
         }
